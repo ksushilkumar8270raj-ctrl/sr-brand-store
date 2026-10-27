@@ -1,131 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111111">
-<title>S R Brand Store | Online Fashion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SR Brand Store - Shop fashion, shirts, t-shirts, jeans and everyday styles online.">
+<title>SR Brand Store — Online Fashion Shopping</title>
 <style>
-:root{--black:#111;--gold:#c8a45d;--cream:#f7f5f0;--muted:#777;--line:#e7e3dc}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#191919;background:#fff}
-a{color:inherit;text-decoration:none}
-.topbar{background:#111;color:#fff;text-align:center;padding:9px 12px;font-size:12px;letter-spacing:.5px}
-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
-.head{max-width:1200px;margin:auto;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.brand{font-size:23px;font-weight:900;letter-spacing:1px}.brand span{color:var(--gold)}
-.tagline{font-size:10px;color:#777;letter-spacing:2px;margin-top:4px}
-.cart-btn,.dark-btn{border:0;background:#111;color:#fff;padding:11px 15px;border-radius:5px;font-weight:700;cursor:pointer}
-.hero{background:linear-gradient(110deg,rgba(0,0,0,.83),rgba(0,0,0,.28)),url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85') center/cover;min-height:350px;color:white;display:flex;align-items:center}
-.hero-inner{max-width:1200px;width:100%;padding:48px 22px;margin:auto}
-.eyebrow{color:#e4c77f;font-size:12px;letter-spacing:3px;font-weight:bold}
-.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.05;max-width:600px;margin:15px 0}
-.hero p{max-width:480px;line-height:1.7;color:#eee}
-.hero a{display:inline-block;background:var(--gold);color:#111;padding:13px 20px;border-radius:4px;font-weight:bold;margin-top:12px}
-main{max-width:1200px;margin:auto;padding:32px 18px 55px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:20px}
-.section-head h2{font-size:27px;margin:0}.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}
-.filter{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:30px;cursor:pointer}
-.filter.active{background:#111;color:#fff;border-color:#111}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
-.photo-wrap{position:relative;background:#f1eee8;aspect-ratio:3/4;overflow:hidden}
-.photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-.card:hover .photo-wrap img{transform:scale(1.035)}
-.badge{position:absolute;top:10px;left:10px;background:#111;color:white;padding:6px 8px;font-size:11px;border-radius:3px}
-.card-body{padding:13px;display:flex;flex-direction:column;flex:1}
-.category{font-size:10px;color:#8c713b;letter-spacing:1.3px;text-transform:uppercase}
-.card h3{font-size:15px;margin:7px 0}
-.desc{font-size:12px;color:#777;line-height:1.45;min-height:32px}
-.price-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:11px 0}
-.price{font-size:18px;font-weight:800}.old{font-size:12px;color:#888;text-decoration:line-through}.off{font-size:11px;color:#21864a;font-weight:bold}
-.card-actions{display:flex;gap:7px;margin-top:auto}
-.card-actions button{flex:1;padding:10px 7px;border-radius:4px;border:1px solid #111;cursor:pointer;font-weight:bold;font-size:12px}
-.add{background:#fff;color:#111}.buy{background:#111;color:#fff}
-.notice{background:var(--cream);padding:22px;border-radius:8px;margin-top:36px;line-height:1.6;font-size:13px}
-footer{background:#111;color:#fff;padding:30px 18px;text-align:center}
-footer .brand{font-size:22px}footer p{color:#bbb;font-size:12px;line-height:1.8}
-footer a{color:#e4c77f}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;display:none;align-items:center;justify-content:center;padding:15px}
-.overlay.show{display:flex}
-.modal{background:#fff;width:min(520px,100%);max-height:90vh;overflow:auto;border-radius:10px;padding:22px}
-.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0 0 15px;font-size:22px}
-.close{border:0;background:#eee;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}
-.cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
-.cart-item img{width:60px;height:70px;object-fit:cover;border-radius:4px}
-.cart-item small{display:block;color:#777;margin-top:4px}
-.qty{display:flex;align-items:center;gap:7px;margin-top:7px}.qty button{width:25px;height:25px;border:1px solid #ddd;background:#fff;cursor:pointer}
-.remove{border:0;background:none;color:#a33;cursor:pointer;font-size:12px;margin-top:5px}
-.total-line{display:flex;justify-content:space-between;margin:10px 0;font-size:14px}
-.total-line.final{font-size:19px;font-weight:bold;border-top:1px solid var(--line);padding-top:12px}
-form label{display:block;font-size:12px;font-weight:bold;margin:12px 0 5px}
-form input,form select,form textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:5px;font:inherit;background:#fff}
-.submit{width:100%;padding:14px;background:#168344;color:#fff;border:0;border-radius:5px;font-weight:bold;font-size:15px;margin-top:16px;cursor:pointer}
-.small-note{font-size:11px;color:#777;line-height:1.5;margin-top:12px}
-.empty{text-align:center;padding:28px;color:#777}
-@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}main{padding:25px 11px 40px}.head{padding:12px}.brand{font-size:19px}.cart-btn{padding:10px 11px}.hero{min-height:300px}.hero-inner{padding:35px 18px}.card-body{padding:10px}.card h3{font-size:13px}.price{font-size:16px}.card-actions{flex-direction:column}.section-head h2{font-size:22px}}
+:root{--site-primary:#6d214f;--site-secondary:#f4c95d;--site-background:#fffaf6;--site-on-primary:#fff;--site-on-secondary:#241a20;--site-on-background:#241a20;--site-font-body:Arial,Helvetica,sans-serif;--site-font-heading:Arial,Helvetica,sans-serif;--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1}
+*{box-sizing:border-box}body{margin:0;font-family:var(--site-font-body);background:light-dark(var(--site-background),#171419);color:light-dark(var(--site-on-background),#f7f2f5)}button,input,select{font:inherit}button{cursor:pointer}.topline{background:#4b1538;color:#fff;text-align:center;padding:8px 10px;font-size:12px;letter-spacing:.3px}.header{background:light-dark(#fff,#241e24);position:sticky;top:0;z-index:6;box-shadow:0 2px 12px #0000000b}.head{max-width:1240px;margin:auto;display:flex;align-items:center;gap:18px;padding:14px 20px}.logo{font-size:25px;font-weight:900;letter-spacing:-1px;white-space:nowrap;color:light-dark(#6d214f,#f1c8df)}.logo em{font-style:normal;color:#e1ad32}.search{display:flex;flex:1;max-width:600px}.search input{min-width:0;flex:1;border:1px solid #e3dce0;border-right:0;border-radius:8px 0 0 8px;padding:12px 14px;background:transparent;color:inherit;outline:none}.search input:focus{border-color:#6d214f}.search button{border:0;background:#6d214f;color:white;padding:0 18px;border-radius:0 8px 8px 0}.head-actions{display:flex;gap:8px}.head-actions button{border:1px solid #e6dfe3;background:transparent;color:inherit;border-radius:8px;padding:10px 12px;white-space:nowrap}.nav{border-top:1px solid #eee5e9;display:flex;justify-content:center;gap:clamp(14px,3vw,34px);padding:11px;overflow:auto;white-space:nowrap}.nav button{border:0;background:none;color:inherit;font-size:13px;font-weight:700}.wrap{max-width:1240px;margin:auto;padding:0 20px}.hero{margin:22px auto 24px;display:grid;grid-template-columns:1.15fr .85fr;min-height:300px;border-radius:16px;overflow:hidden;background:#f1e5ec}.hero-copy{padding:clamp(24px,5vw,58px);background:linear-gradient(130deg,#f8edf3,#ead6e2);color:#341426;display:flex;flex-direction:column;justify-content:center}.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:#8c416b}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-1.8px;margin:14px 0}.hero p{max-width:430px;line-height:1.7;color:#674b5c}.btn{border:0;border-radius:7px;background:#6d214f;color:#fff;padding:12px 17px;font-weight:700}.hero .btn{align-self:flex-start;background:#6d214f}.hero-art{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#fff8 0 18%,transparent 19%),linear-gradient(140deg,#cba4ba,#86516e);position:relative;overflow:hidden}.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #fff8;border-radius:50%;width:250px;height:250px}.hero-art:after{width:330px;height:330px}.fashion-icon{font-size:clamp(100px,17vw,190px);z-index:1;filter:drop-shadow(0 18px 12px #44203933)}.hero-badge{position:absolute;right:18px;top:18px;background:#f4c95d;color:#30231c;padding:10px 13px;border-radius:50%;font-weight:900;text-align:center;transform:rotate(8deg);z-index:2}.section{margin:34px auto}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:17px}.section h2{font-size:clamp(23px,3vw,30px);margin:0;letter-spacing:-.7px}.sub{font-size:13px;color:light-dark(#786b73,#c1b5bd);margin:6px 0 0}.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.cat{background:light-dark(#fff,#241e24);border:1px solid light-dark(#eee5e9,#3b303a);border-radius:12px;padding:15px 10px;text-align:center;color:inherit;transition:.18s}.cat:hover{transform:translateY(-3px);border-color:#b77a9b}.cat-icon{width:65px;height:65px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;background:#f4e8ef;font-size:34px}.cat strong{display:block;font-size:14px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid #e1d6dd;background:light-dark(#fff,#241e24);color:inherit;border-radius:99px;padding:8px 13px;font-size:12px}.chip.active{background:#6d214f;color:#fff;border-color:#6d214f}.sort{border:1px solid #e1d6dd;border-radius:7px;padding:9px;background:light-dark(#fff,#241e24);color:inherit}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}.card{background:light-dark(#fff,#241e24);border:1px solid light-dark(#eee5e9,#3b303a);border-radius:11px;overflow:hidden;position:relative;min-width:0}.visual{height:220px;display:grid;place-items:center;position:relative;background:linear-gradient(145deg,#f4e8ef,#e4d4df)}.visual .emoji{font-size:88px;filter:drop-shadow(0 10px 6px #39233220)}.discount{position:absolute;top:10px;left:10px;border-radius:4px;background:#18794e;color:#fff;font-size:10px;padding:5px 7px;font-weight:800}.heart{position:absolute;right:9px;top:8px;border:0;background:#fff;color:#6d214f;border-radius:50%;width:32px;height:32px;font-size:17px}.info{padding:13px}.info .type{font-size:11px;color:#9a6682;text-transform:uppercase;font-weight:700;letter-spacing:.7px}.info h3{font-size:14px;line-height:1.4;margin:7px 0 8px;min-height:39px}.rating{font-size:11px;color:#a16e21;margin-bottom:8px}.price{font-weight:800;font-size:18px}.old{font-size:12px;color:#8b8188;text-decoration:line-through;font-weight:400;margin-left:5px}.off{font-size:11px;color:#18794e;font-weight:700;margin-left:5px}.info .btn{width:100%;margin-top:12px;padding:10px;font-size:13px}.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.trust article{display:flex;align-items:center;gap:12px;border:1px solid #eee5e9;background:light-dark(#fff,#241e24);border-radius:10px;padding:17px}.trust .ico{font-size:25px}.trust b{display:block;font-size:14px;margin-bottom:4px}.trust small{color:light-dark(#786b73,#c1b5bd);font-size:12px}.newsletter{background:#4b1538;color:white;border-radius:13px;padding:25px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.newsletter h2{margin:0 0 6px}.newsletter p{margin:0;color:#ead9e3;font-size:13px}.newsletter form{display:flex;gap:7px}.newsletter input{padding:11px;border:0;border-radius:6px;min-width:210px}.newsletter button{border:0;background:#f4c95d;color:#2a1d23;font-weight:800;padding:11px 15px;border-radius:6px}.footer{margin-top:44px;background:#21151e;color:#f7eff4;padding:35px 20px 18px}.foot-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}.footer h3{color:#f4c95d}.footer p,.footer li{font-size:13px;color:#d0c1ca;line-height:1.8}.footer ul{list-style:none;padding:0}.copyright{max-width:1240px;margin:22px auto 0;border-top:1px solid #493643;padding-top:15px;text-align:center;color:#b7a6b1;font-size:12px}.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:10}.overlay.show{display:block}.drawer{position:fixed;z-index:11;right:0;top:0;bottom:0;width:min(430px,100%);background:light-dark(#fff,#241e24);color:inherit;padding:22px;overflow:auto;transform:translateX(105%);transition:.25s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e6dce2;padding-bottom:12px}.drawer-head h2{margin:0}.close{border:0;background:none;color:inherit;font-size:27px}.cartline{padding:14px 0;border-bottom:1px solid #e6dce2;display:flex;justify-content:space-between;gap:10px}.qty{display:flex;gap:8px;align-items:center;margin-top:7px}.qty button{background:none;border:1px solid #ddd;color:inherit;border-radius:4px;padding:2px 9px}.checkout{width:100%;margin-top:12px}.small-note{font-size:11px;line-height:1.6;color:#92848d}.toast{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#21151e;color:#fff;padding:12px 18px;border-radius:8px;z-index:20;max-width:90%;text-align:center}.toast.show{display:block}.empty{grid-column:1/-1;text-align:center;padding:35px;color:#8c7b86}
+@media(max-width:850px){.head{flex-wrap:wrap}.search{order:3;flex-basis:100%;max-width:none}.hero{grid-template-columns:1fr .8fr}.cats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.visual{height:190px}.foot-inner{grid-template-columns:1fr 1fr}.foot-inner>div:first-child{grid-column:1/-1}}
+@media(max-width:560px){.head{padding:12px;gap:10px}.logo{font-size:21px}.head-actions button{padding:9px;font-size:12px}.nav{justify-content:flex-start}.wrap{padding:0 12px}.hero{grid-template-columns:1fr;margin-top:13px}.hero-copy{padding:27px 22px}.hero-art{min-height:155px}.hero-art:before{width:140px;height:140px}.hero-art:after{width:190px;height:190px}.fashion-icon{font-size:105px}.hero-badge{font-size:11px;right:10px;top:10px}.cats{grid-template-columns:repeat(3,1fr);gap:8px}.cat{padding:10px 5px}.cat-icon{width:52px;height:52px;font-size:27px}.cat strong{font-size:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.visual{height:165px}.visual .emoji{font-size:68px}.info{padding:10px}.info h3{font-size:13px}.price{font-size:16px}.old{font-size:10px;margin-left:2px}.off{display:block;margin:3px 0 0}.trust{grid-template-columns:1fr}.newsletter{padding:20px}.newsletter form{width:100%}.newsletter input{min-width:0;flex:1;width:50%}.foot-inner{grid-template-columns:1fr}.foot-inner>div:first-child{grid-column:auto}}
 </style>
 </head>
 <body>
-<div class="topbar">PREMIUM STYLE • GREAT VALUE • ORDER DIRECTLY ON WHATSAPP</div>
-<header>
+<div class="topline">SR BRAND STORE • नए स्टाइल, शानदार कीमतें • आपका स्वागत है</div>
+<header class="header">
   <div class="head">
-    <a href="#" aria-label="S R Brand Store home">
-      <div class="brand">S R <span>BRAND STORE</span></div>
-      <div class="tagline">YOUR STYLE. YOUR STATEMENT.</div>
-    </a>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+    <div class="logo">SR <em>BRAND</em> STORE</div>
+    <form class="search" id="searchForm"><input id="search" placeholder="शर्ट, टी-शर्ट, जीन्स और बहुत कुछ खोजें..." aria-label="प्रोडक्ट खोजें"><button type="submit">🔎 खोजें</button></form>
+    <div class="head-actions"><button id="accountBtn">👤 अकाउंट</button><button id="cartBtn">🛍️ कार्ट (<span id="cartCount">0</span>)</button></div>
   </div>
+  <nav class="nav">
+    <button data-cat="All">सभी प्रोडक्ट</button><button data-cat="Women">महिलाएँ</button><button data-cat="Men">पुरुष</button><button data-cat="Kids">बच्चे</button><button data-cat="T-Shirts">टी-शर्ट</button><button data-cat="Shirts">शर्ट</button><button data-cat="Jeans">जीन्स और पैंट</button><button data-cat="Ethnic">एथनिक वियर</button>
+  </nav>
 </header>
-<section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">NEW SEASON • NEW LOOK</div>
-    <h1>Style that speaks for you.</h1>
-    <p>Explore everyday fashion, smart fits and fresh looks at S R Brand Store. Choose your products and place your order on WhatsApp.</p>
-    <a href="#products">SHOP COLLECTION</a>
-  </div>
-</section>
-<main id="products">
-  <div class="section-head">
-    <div><h2>Shop our collection</h2><p>Two products are available right now. More products coming soon.</p></div>
-  </div>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="productGrid"></div>
-  <div class="notice"><strong>How to order:</strong> Add products to your cart, open the cart, enter your details and choose a WhatsApp number. WhatsApp will open with your order summary ready to send. Your order is confirmed only after the store replies to you.</div>
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-copy"><div class="eyebrow">NEW SEASON · NEW YOU</div><h1>स्टाइल जो<br>आपको खास बनाए।</h1><p>ट्रेंडी फैशन, रोज़मर्रा के आरामदायक कपड़े और आपके बजट में शानदार लुक — सिर्फ SR Brand Store पर।</p><button class="btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">कलेक्शन देखें →</button></div>
+    <div class="hero-art"><div class="hero-badge">NEW<br>DROP</div><div class="fashion-icon">🛍️</div></div>
+  </section>
+  <section class="section"><div class="section-head"><div><h2>अपनी कैटेगरी चुनें</h2><p class="sub">आपके और आपके परिवार के लिए</p></div></div>
+  <div class="cats">
+    <button class="cat" data-cat="Women"><div class="cat-icon">👗</div><strong>महिलाओं के कपड़े</strong></button>
+    <button class="cat" data-cat="Men"><div class="cat-icon">👔</div><strong>पुरुषों के कपड़े</strong></button>
+    <button class="cat" data-cat="Kids"><div class="cat-icon">🧸</div><strong>बच्चों के कपड़े</strong></button>
+    <button class="cat" data-cat="T-Shirts"><div class="cat-icon">👕</div><strong>टी-शर्ट</strong></button>
+    <button class="cat" data-cat="Jeans"><div class="cat-icon">👖</div><strong>जीन्स / पैंट</strong></button>
+  </div></section>
+  <section class="section" id="shop"><div class="section-head"><div><h2>आपके लिए चुना गया</h2><p class="sub">डेमो आइटम — यहाँ अपने असली प्रोडक्ट जोड़ें</p></div><span class="sub" id="count"></span></div>
+    <div class="toolbar"><div class="chips"><button class="chip active" data-filter="All">सब</button><button class="chip" data-filter="Shirts">शर्ट</button><button class="chip" data-filter="T-Shirts">टी-शर्ट</button><button class="chip" data-filter="Jeans">जीन्स / पैंट</button><button class="chip" data-filter="Ethnic">एथनिक</button></div><select class="sort" id="sort"><option value="featured">फीचर्ड</option><option value="low">कीमत: कम से ज्यादा</option><option value="high">कीमत: ज्यादा से कम</option></select></div>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section class="section"><div class="trust">
+    <article><div class="ico">🚚</div><div><b>डिलीवरी सुविधा</b><small>डिलीवरी सेवा सेट करने के बाद</small></div></article>
+    <article><div class="ico">🔒</div><div><b>सुरक्षित खरीदारी</b><small>लाइव पेमेंट सिस्टम जोड़ना बाकी है</small></div></article>
+    <article><div class="ico">💬</div><div><b>ऑर्डर सहायता</b><small>WhatsApp से सहायता की सुविधा</small></div></article>
+  </div></section>
+  <section class="section newsletter"><div><h2>SR परिवार से जुड़ें</h2><p>नए कलेक्शन और ऑफर्स की जानकारी पाएँ।</p></div><form id="newsForm"><input id="email" type="email" placeholder="आपका ईमेल (डेमो)" required><button type="submit">जुड़ें</button></form></section>
 </main>
-<footer>
-  <div class="brand">S R <span>BRAND STORE</span></div>
-  <p>Fashion for your everyday style</p>
-  <p>WhatsApp: <a href="https://wa.me/917465076988">+91 74650 76988</a> &nbsp;|&nbsp; <a href="https://wa.me/919258982791">+91 92589 82791</a></p>
-  <p>© <span id="year"></span> S R Brand Store. All rights reserved.</p>
-</footer>
-
-<div class="overlay" id="cartOverlay" onclick="overlayClick(event)">
-  <div class="modal">
-    <div class="modal-head"><h2>Your Cart</h2><button class="close" onclick="closeCart()" aria-label="Close">×</button></div>
-    <div id="cartItems"></div>
-    <div id="cartSummary"></div>
-    <form id="checkoutForm" onsubmit="sendOrder(event)">
-      <h2 style="font-size:18px;margin:20px 0 4px">Delivery details</h2>
-      <label for="customerName">Your name *</label><input id="customerName" required maxlength="80" placeholder="Enter your name">
-      <label for="customerPhone">Your mobile number *</label><input id="customerPhone" required inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="Enter your phone number">
-      <label for="customerAddress">Delivery address *</label><textarea id="customerAddress" required rows="3" maxlength="350" placeholder="House / street / area / city / PIN code"></textarea>
-      <label for="customerSize">Size preference (if applicable)</label><select id="customerSize"><option value="Not specified">Choose size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>Mixed / confirm on WhatsApp</option></select>
-      <label for="whatsappNumber">Send order to *</label>
-      <select id="whatsappNumber"><option value="917465076988">WhatsApp 1 — 74650 76988</option><option value="919258982791">WhatsApp 2 — 92589 82791</option></select>
-      <button class="submit" type="submit">Continue to WhatsApp</button>
-      <div class="small-note">This opens WhatsApp with your order details. Press Send in WhatsApp to submit the order. Product photo links are included when available; WhatsApp does not automatically attach image files through this website.</div>
-    </form>
-  </div>
-</div>
+<footer class="footer"><div class="foot-inner">
+  <div><div class="logo" style="color:#fff">SR <em>BRAND</em> STORE</div><p>आपकी ऑनलाइन फैशन शॉप। हर दिन के लिए स्टाइल, आराम और आपकी पसंद।</p><p><b>दुकान का पता:</b> हरदोआगंज, जिला अलीगढ़, उत्तर प्रदेश</p><p><b>कस्टमर केयर:</b> अपना संपर्क नंबर यहाँ जोड़ें</p></div>
+  <div><h3>ग्राहक सहायता</h3><ul><li>ऑर्डर कैसे करें</li><li>डिलीवरी जानकारी</li><li>रिटर्न और एक्सचेंज नीति</li><li>हमसे संपर्क करें</li></ul></div>
+  <div><h3>हमारे बारे में</h3><ul><li>SR Brand Store</li><li>प्राइवेसी पॉलिसी</li><li>नियम और शर्तें</li><li>पेमेंट जानकारी</li></ul></div>
+</div><div class="copyright">© <span id="year"></span> SR Brand Store. All rights reserved. Website starter demo.</div></footer>
+<div class="overlay" id="overlay"></div><aside class="drawer" id="drawer"><div class="drawer-head"><h2>आपका शॉपिंग कार्ट</h2><button class="close" id="close">×</button></div><div id="cartItems"></div><div id="summary"></div><p class="small-note">यह अभी डेमो है। असली ऑर्डर लेने से पहले प्रोडक्ट स्टॉक, डिलीवरी, रिटर्न नीति और पेमेंट सिस्टम सेट करना जरूरी है।</p></aside><div class="toast" id="toast"></div>
 <script>
-/*
-  STORE SETUP:
-  1. Replace the sample products below with your real product names, prices and image URLs.
-  2. Upload product photos to your website/hosting and put each public image URL in the "image" field.
-  3. Update the store address in the footer.
-  4. This is a front-end demo. Real stock, payment, admin panel and automatic order tracking need a backend.
-*/
-const products = [
+const products=[
+{id:1,name:"Classic Casual Shirt",cat:"Shirts",aud:"Men",price:499,old:799,emoji:"👔",tone:0},
+{id:2,name:"Premium Cotton T-Shirt",cat:"T-Shirts",aud:"Men",price:299,old:449,emoji:"👕",tone:1},
+{id:3,name:"Everyday Denim Jeans",cat:"Jeans",aud:"Men",price:699,old:999,emoji:"👖",tone:2},
+{id:4,name:"Printed Kurti",cat:"Ethnic",aud:"Women",price:549,old:799,emoji:"👗",tone:3},
+{id:5,name:"Casual Top",cat:"Ethnic",aud:"Women",price:399,old:599,emoji:"👚",tone:4},
+{id:6,name:"Kids Everyday Set",cat:"Kids",aud:"Kids",price:349,old:499,emoji:"🧸",tone:5},
+{id:7,name:"Smart Fit Formal Shirt",cat:"Shirts",aud:"Men",price:599,old:899,emoji:"👔",tone:6},
+{id:8,name:"Comfort Track Pant",cat:"Jeans",aud:"Men",price:399,old:599,emoji:"🩳",tone:7},
+{id:9,name:"Classic Polo T-Shirt",cat:"T-Shirts",aud:"Men",price:399,old:599,emoji:"👕",tone:8},
+{id:10,name:"Festive Kurta",cat:"Ethnic",aud:"Men",price:799,old:1199,emoji:"🥻",tone:9},
+{id:11,name:"Kids Graphic Tee",cat:"T-Shirts",aud:"Kids",price:249,old:349,emoji:"👕",tone:10},
+{id:12,name:"Women's Denim Jeans",cat:"Jeans",aud:"Women",price:649,old:899,emoji:"👖",tone:11}
+];
+let cart=[],activeFilter="All";
+const money=n=>"₹"+n.toLocaleString("en-IN");
+function toast(s){let t=document.getElementById("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300)}
+function render(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ let list=products.filter(p=>(activeFilter==="All"||p.cat===activeFilter||p.aud===activeFilter)&&(p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||p.aud.toLowerCase().includes(q)));
+ const s=document.getElementById("sort").value;if(s==="low")list.sort((a,b)=>a.price-b.price);if(s==="high")list.sort((a,b)=>b.price-a.price);
+ document.getElementById("count").textContent=list.length+" प्रोडक्ट";
+ document.getElementById("grid").innerHTML=list.length?list.map(p=>`<article class="card"><div class="visual" style="background:linear-gradient(145deg,${["#f5e4ed,#e5cddd","#f7ebcf,#e9d9b0","#e2e8f3,#c6d0e6","#f2e0d8,#e1c2b8"][p.tone%4]})"><span class="discount">${Math.round((1-p.price/p.old)*100)}% OFF</span><button class="heart" onclick="toast('Wishlist सुविधा अगले वर्ज़न में जोड़ी जाएगी')" aria-label="Wishlist">♡</button><span class="emoji">${p.emoji}</span></div><div class="info"><div class="type">${p.cat} · ${p.aud}</div><h3>${p.name}</h3><div class="rating">★★★★☆ <span style="color:#887b84">डेमो रेटिंग</span></div><div><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span><span class="off">${Math.round((1-p.price/p.old)*100)}% off</span></div><button class="btn" onclick="add(${p.id})">🛍️ कार्ट में डालें</button></div></article>`).join(""):'<div class="empty">कोई प्रोडक्ट नहीं मिला। दूसरी कैटेगरी या नाम से खोजें।</div>';
+ document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===activeFilter));
+}
+function add(id){let x=cart.find(i=>i.id===id);if(x)x.qty++;else cart.push({id,qty:1});updateCart();toast("प्रोडक्ट कार्ट में जुड़ गया")}
+function qty(id,d){let x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<1)cart=cart.filter(i=>i.id!==id);updateCart()}
+function updateCart(){document.getElementById("cartCount").textContent=cart.reduce((n,i)=>n+i.qty,0);let box=document.getElementById("cartItems");if(!cart.length){box.innerHTML='<p class="sub">आपका कार्ट अभी खाली है।</p>';document.getElementById("summary").innerHTML="";return}
+box.innerHTML=cart.map(i=>{let p=products.find(p=>p.id===i.id);return `<div class="cartline"><div><b>${p.name}</b><div class="sub">${money(p.price)} प्रति आइटम</div><div class="qty"><button onclick="qty(${p.id},-1)">−</button><span>${i.qty}</span><button onclick="qty(${p.id},1)">+</button></div></div><b>${money(p.price*i.qty)}</b></div>`}).join("");
+let total=cart.reduce((n,i)=>n+products.find(p=>p.id===i.id).price*i.qty,0);document.getElementById("summary").innerHTML=`<h3>कुल: ${money(total)}</h3><button class="btn checkout" onclick="orderWhatsApp()">WhatsApp पर ऑर्डर पूछें</button>`}
+function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("overlay").classList.add("show")}
+function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("overlay").classList.remove("show")}
+function orderWhatsApp(){let textMsg="Namaste SR Brand Store, mujhe ye products chahiye:\n"+cart.map(i=>{let p=products.find(p=>p.id===i.id);return `${p.name} x ${i.qty} = ${money(p.price*i.qty)}`}).join("\n")+"\nTotal: "+money(cart.reduce((n,i)=>n+products.find(p=>p.id===i.id).price*i.qty,0));
+const number="91XXXXXXXXXX";if(number.includes("X")){toast("कोड में अपना WhatsApp नंबर डालना बाकी है");return}window.open("https://wa.me/"+number+"?text="+encodeURIComponent(textMsg),"_blank")}
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();render();document.getElementById("shop").scrollIntoView({behavior:"smooth"})});
+document.getElementById("search").addEventListener("input",render);document.getElementById("sort").addEventListener("change",render);
+document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.cat;render();document.getElementById("shop").scrollIntoView({behavior:"smooth"})}));
+document.querySelectorAll("[data-filter]").forEach(b
