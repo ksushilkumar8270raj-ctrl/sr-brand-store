@@ -89,7 +89,7 @@ form input,form select,form textarea{width:100%;padding:11px;border:1px solid #d
 </section>
 <main id="products">
   <div class="section-head">
-    <div><h2>Shop our collection</h2><p>Choose a product to view its price and order details.</p></div>
+    <div><h2>Shop our collection</h2><p>Two products are available right now. More products coming soon.</p></div>
   </div>
   <div class="filters" id="filters"></div>
   <div class="grid" id="productGrid"></div>
@@ -97,7 +97,7 @@ form input,form select,form textarea{width:100%;padding:11px;border:1px solid #d
 </main>
 <footer>
   <div class="brand">S R <span>BRAND STORE</span></div>
-  <p>Fashion for your everyday style<br>Store location: Update your full shop address here</p>
+  <p>Fashion for your everyday style</p>
   <p>WhatsApp: <a href="https://wa.me/917465076988">+91 74650 76988</a> &nbsp;|&nbsp; <a href="https://wa.me/919258982791">+91 92589 82791</a></p>
   <p>© <span id="year"></span> S R Brand Store. All rights reserved.</p>
 </footer>
@@ -129,72 +129,3 @@ form input,form select,form textarea{width:100%;padding:11px;border:1px solid #d
   4. This is a front-end demo. Real stock, payment, admin panel and automatic order tracking need a backend.
 */
 const products = [
- {id:1,name:"Classic Casual Shirt",category:"Shirts",price:599,mrp:999,discount:40,tag:"BESTSELLER",desc:"Everyday style • Easy to pair",image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=85"},
- {id:2,name:"Premium Basic T-Shirt",category:"T-Shirts",price:299,mrp:499,discount:40,tag:"POPULAR",desc:"Comfortable everyday wear",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"},
- {id:3,name:"Smart Fit Trousers",category:"Pants",price:699,mrp:1099,discount:36,tag:"NEW",desc:"A clean look for any occasion",image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=85"},
- {id:4,name:"Everyday Track Lower",category:"Lowers",price:399,mrp:599,discount:33,tag:"VALUE PICK",desc:"Relaxed fit for daily comfort",image:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=800&q=85"},
- {id:5,name:"Printed Casual Shirt",category:"Shirts",price:649,mrp:999,discount:35,tag:"TRENDING",desc:"A fresh look for outings",image:"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=800&q=85"},
- {id:6,name:"Essential White T-Shirt",category:"T-Shirts",price:279,mrp:399,discount:30,tag:"ESSENTIAL",desc:"Simple, versatile and easy to style",image:"https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=800&q=85"},
- {id:7,name:"Casual Denim Jeans",category:"Pants",price:799,mrp:1299,discount:38,tag:"FAVOURITE",desc:"Pair with tees and casual shirts",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=85"},
- {id:8,name:"Comfort Fit Joggers",category:"Lowers",price:449,mrp:699,discount:36,tag:"COMFORT",desc:"A relaxed everyday option",image:"https://images.unsplash.com/photo-1506629905607-d9a6a4a5a1a1?auto=format&fit=crop&w=800&q=85"}
-];
-let cart = [];
-let activeCategory = "All";
-const categories = ["All", ...new Set(products.map(p=>p.category))];
-const money = n => "₹" + Number(n).toLocaleString("en-IN");
-function renderFilters(){
- document.getElementById("filters").innerHTML = categories.map(c=>`<button class="filter ${c===activeCategory?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join("");
-}
-function setCategory(c){activeCategory=c;renderFilters();renderProducts();}
-function renderProducts(){
- const list = products.filter(p=>activeCategory==="All"||p.category===activeCategory);
- document.getElementById("productGrid").innerHTML = list.map(p=>`
- <article class="card">
-  <div class="photo-wrap"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="badge">${p.tag}</span></div>
-  <div class="card-body"><div class="category">${p.category}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div>
-   <div class="price-row"><span class="price">${money(p.price)}</span><span class="old">${money(p.mrp)}</span><span class="off">${p.discount}% OFF</span></div>
-   <div class="card-actions"><button class="add" onclick="addToCart(${p.id})">Add to Cart</button><button class="buy" onclick="buyNow(${p.id})">Order Now</button></div>
-  </div>
- </article>`).join("");
-}
-function addToCart(id){const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});updateCartCount();showToast("Added to cart");}
-function buyNow(id){addToCart(id);openCart();}
-function updateCartCount(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);}
-function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("show");document.body.style.overflow="hidden";}
-function closeCart(){document.getElementById("cartOverlay").classList.remove("show");document.body.style.overflow="";}
-function overlayClick(e){if(e.target.id==="cartOverlay")closeCart();}
-function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateCartCount();renderCart();}
-function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCartCount();renderCart();}
-function renderCart(){
- const box=document.getElementById("cartItems"),summary=document.getElementById("cartSummary"),form=document.getElementById("checkoutForm");
- if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.<br>Choose a product to get started.</div>';summary.innerHTML="";form.style.display="none";return;}
- form.style.display="block";
- box.innerHTML=cart.map(x=>{const p=products.find(z=>z.id===x.id);return `<div class="cart-item"><img src="${p.image}" alt="${p.name}"><div><strong>${p.name}</strong><small>${money(p.price)} each • ${p.discount}% off</small><div class="qty"><button type="button" onclick="changeQty(${p.id},-1)">−</button><span>${x.qty}</span><button type="button" onclick="changeQty(${p.id},1)">+</button></div><button type="button" class="remove" onclick="removeItem(${p.id})">Remove</button></div><strong>${money(p.price*x.qty)}</strong></div>`}).join("");
- const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);
- const savings=cart.reduce((s,x)=>{const p=products.find(z=>z.id===x.id);return s+(p.mrp-p.price)*x.qty},0);
- summary.innerHTML=`<div class="total-line"><span>Estimated savings</span><strong style="color:#21864a">−${money(savings)}</strong></div><div class="total-line final"><span>Subtotal</span><span>${money(total)}</span></div><div class="small-note">Delivery charges, if any, will be confirmed by the store on WhatsApp.</div>`;
-}
-function sendOrder(event){
- event.preventDefault();
- if(!cart.length){alert("Your cart is empty.");return;}
- const name=document.getElementById("customerName").value.trim();
- const phone=document.getElementById("customerPhone").value.trim();
- const address=document.getElementById("customerAddress").value.trim();
- const size=document.getElementById("customerSize").value;
- const number=document.getElementById("whatsappNumber").value;
- const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);
- const savings=cart.reduce((s,x)=>{const p=products.find(z=>z.id===x.id);return s+(p.mrp-p.price)*x.qty},0);
- let message=`*NEW ORDER REQUEST — S R BRAND STORE*%0A%0A`;
- message+=`*Customer:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Size preference:* ${encodeURIComponent(size)}%0A%0A*ORDER ITEMS*%0A`;
- cart.forEach((x,i)=>{const p=products.find(z=>z.id===x.id);message+=`%0A${i+1}. ${encodeURIComponent(p.name)}%0APrice: ${money(p.price)}%0AQuantity: ${x.qty}%0ADiscount: ${p.discount}%25%0ALine total: ${money(p.price*x.qty)}%0AProduct photo: ${encodeURIComponent(p.image)}%0A`;});
- message+=`%0A*Estimated savings:* ${money(savings)}%0A*ORDER SUBTOTAL:* ${money(total)}%0A%0APlease confirm availability, delivery charges and final order total.`;
- const url=`https://wa.me/${number}?text=${message}`;
- window.open(url,"_blank","noopener");
-}
-let toastTimer;
-function showToast(msg){let t=document.getElementById("toast");if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:5px;z-index:50;font-size:13px";document.body.appendChild(t)}t.textContent=msg;t.style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display="none",1600);}
-document.getElementById("year").textContent=new Date().getFullYear();
-renderFilters();renderProducts();updateCartCount();
-</script>
-</body>
-</html>
