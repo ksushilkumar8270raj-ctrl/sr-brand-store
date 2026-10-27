@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>S R Brand Store | Online Fashion</title>
+<style>
+:root{--black:#111;--gold:#c8a45d;--cream:#f7f5f0;--muted:#777;--line:#e7e3dc}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#191919;background:#fff}
+a{color:inherit;text-decoration:none}
+.topbar{background:#111;color:#fff;text-align:center;padding:9px 12px;font-size:12px;letter-spacing:.5px}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.head{max-width:1200px;margin:auto;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-size:23px;font-weight:900;letter-spacing:1px}.brand span{color:var(--gold)}
+.tagline{font-size:10px;color:#777;letter-spacing:2px;margin-top:4px}
+.cart-btn,.dark-btn{border:0;background:#111;color:#fff;padding:11px 15px;border-radius:5px;font-weight:700;cursor:pointer}
+.hero{background:linear-gradient(110deg,rgba(0,0,0,.83),rgba(0,0,0,.28)),url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85') center/cover;min-height:350px;color:white;display:flex;align-items:center}
+.hero-inner{max-width:1200px;width:100%;padding:48px 22px;margin:auto}
+.eyebrow{color:#e4c77f;font-size:12px;letter-spacing:3px;font-weight:bold}
+.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.05;max-width:600px;margin:15px 0}
+.hero p{max-width:480px;line-height:1.7;color:#eee}
+.hero a{display:inline-block;background:var(--gold);color:#111;padding:13px 20px;border-radius:4px;font-weight:bold;margin-top:12px}
+main{max-width:1200px;margin:auto;padding:32px 18px 55px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:20px}
+.section-head h2{font-size:27px;margin:0}.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}
+.filter{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:30px;cursor:pointer}
+.filter.active{background:#111;color:#fff;border-color:#111}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.photo-wrap{position:relative;background:#f1eee8;aspect-ratio:3/4;overflow:hidden}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.card:hover .photo-wrap img{transform:scale(1.035)}
+.badge{position:absolute;top:10px;left:10px;background:#111;color:white;padding:6px 8px;font-size:11px;border-radius:3px}
+.card-body{padding:13px;display:flex;flex-direction:column;flex:1}
+.category{font-size:10px;color:#8c713b;letter-spacing:1.3px;text-transform:uppercase}
+.card h3{font-size:15px;margin:7px 0}
+.desc{font-size:12px;color:#777;line-height:1.45;min-height:32px}
+.price-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:11px 0}
+.price{font-size:18px;font-weight:800}.old{font-size:12px;color:#888;text-decoration:line-through}.off{font-size:11px;color:#21864a;font-weight:bold}
+.card-actions{display:flex;gap:7px;margin-top:auto}
+.card-actions button{flex:1;padding:10px 7px;border-radius:4px;border:1px solid #111;cursor:pointer;font-weight:bold;font-size:12px}
+.add{background:#fff;color:#111}.buy{background:#111;color:#fff}
+.notice{background:var(--cream);padding:22px;border-radius:8px;margin-top:36px;line-height:1.6;font-size:13px}
+footer{background:#111;color:#fff;padding:30px 18px;text-align:center}
+footer .brand{font-size:22px}footer p{color:#bbb;font-size:12px;line-height:1.8}
+footer a{color:#e4c77f}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;display:none;align-items:center;justify-content:center;padding:15px}
+.overlay.show{display:flex}
+.modal{background:#fff;width:min(520px,100%);max-height:90vh;overflow:auto;border-radius:10px;padding:22px}
+.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0 0 15px;font-size:22px}
+.close{border:0;background:#eee;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}
+.cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.cart-item img{width:60px;height:70px;object-fit:cover;border-radius:4px}
+.cart-item small{display:block;color:#777;margin-top:4px}
+.qty{display:flex;align-items:center;gap:7px;margin-top:7px}.qty button{width:25px;height:25px;border:1px solid #ddd;background:#fff;cursor:pointer}
+.remove{border:0;background:none;color:#a33;cursor:pointer;font-size:12px;margin-top:5px}
+.total-line{display:flex;justify-content:space-between;margin:10px 0;font-size:14px}
+.total-line.final{font-size:19px;font-weight:bold;border-top:1px solid var(--line);padding-top:12px}
+form label{display:block;font-size:12px;font-weight:bold;margin:12px 0 5px}
+form input,form select,form textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:5px;font:inherit;background:#fff}
+.submit{width:100%;padding:14px;background:#168344;color:#fff;border:0;border-radius:5px;font-weight:bold;font-size:15px;margin-top:16px;cursor:pointer}
+.small-note{font-size:11px;color:#777;line-height:1.5;margin-top:12px}
+.empty{text-align:center;padding:28px;color:#777}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}main{padding:25px 11px 40px}.head{padding:12px}.brand{font-size:19px}.cart-btn{padding:10px 11px}.hero{min-height:300px}.hero-inner{padding:35px 18px}.card-body{padding:10px}.card h3{font-size:13px}.price{font-size:16px}.card-actions{flex-direction:column}.section-head h2{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="topbar">PREMIUM STYLE • GREAT VALUE • ORDER DIRECTLY ON WHATSAPP</div>
+<header>
+  <div class="head">
+    <a href="#" aria-label="S R Brand Store home">
+      <div class="brand">S R <span>BRAND STORE</span></div>
+      <div class="tagline">YOUR STYLE. YOUR STATEMENT.</div>
+    </a>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">NEW SEASON • NEW LOOK</div>
+    <h1>Style that speaks for you.</h1>
+    <p>Explore everyday fashion, smart fits and fresh looks at S R Brand Store. Choose your products and place your order on WhatsApp.</p>
+    <a href="#products">SHOP COLLECTION</a>
+  </div>
+</section>
+<main id="products">
+  <div class="section-head">
+    <div><h2>Shop our collection</h2><p>Choose a product to view its price and order details.</p></div>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="productGrid"></div>
+  <div class="notice"><strong>How to order:</strong> Add products to your cart, open the cart, enter your details and choose a WhatsApp number. WhatsApp will open with your order summary ready to send. Your order is confirmed only after the store replies to you.</div>
+</main>
+<footer>
+  <div class="brand">S R <span>BRAND STORE</span></div>
+  <p>Fashion for your everyday style<br>Store location: Update your full shop address here</p>
+  <p>WhatsApp: <a href="https://wa.me/917465076988">+91 74650 76988</a> &nbsp;|&nbsp; <a href="https://wa.me/919258982791">+91 92589 82791</a></p>
+  <p>© <span id="year"></span> S R Brand Store. All rights reserved.</p>
+</footer>
+
+<div class="overlay" id="cartOverlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="modal-head"><h2>Your Cart</h2><button class="close" onclick="closeCart()" aria-label="Close">×</button></div>
+    <div id="cartItems"></div>
+    <div id="cartSummary"></div>
+    <form id="checkoutForm" onsubmit="sendOrder(event)">
+      <h2 style="font-size:18px;margin:20px 0 4px">Delivery details</h2>
+      <label for="customerName">Your name *</label><input id="customerName" required maxlength="80" placeholder="Enter your name">
+      <label for="customerPhone">Your mobile number *</label><input id="customerPhone" required inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="Enter your phone number">
+      <label for="customerAddress">Delivery address *</label><textarea id="customerAddress" required rows="3" maxlength="350" placeholder="House / street / area / city / PIN code"></textarea>
+      <label for="customerSize">Size preference (if applicable)</label><select id="customerSize"><option value="Not specified">Choose size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>Mixed / confirm on WhatsApp</option></select>
+      <label for="whatsappNumber">Send order to *</label>
+      <select id="whatsappNumber"><option value="917465076988">WhatsApp 1 — 74650 76988</option><option value="919258982791">WhatsApp 2 — 92589 82791</option></select>
+      <button class="submit" type="submit">Continue to WhatsApp</button>
+      <div class="small-note">This opens WhatsApp with your order details. Press Send in WhatsApp to submit the order. Product photo links are included when available; WhatsApp does not automatically attach image files through this website.</div>
+    </form>
+  </div>
+</div>
+<script>
+/*
+  STORE SETUP:
+  1. Replace the sample products below with your real product names, prices and image URLs.
+  2. Upload product photos to your website/hosting and put each public image URL in the "image" field.
+  3. Update the store address in the footer.
+  4. This is a front-end demo. Real stock, payment, admin panel and automatic order tracking need a backend.
+*/
+const products = [
+ {id:1,name:"Classic Casual Shirt",category:"Shirts",price:599,mrp:999,discount:40,tag:"BESTSELLER",desc:"Everyday style • Easy to pair",image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=85"},
+ {id:2,name:"Premium Basic T-Shirt",category:"T-Shirts",price:299,mrp:499,discount:40,tag:"POPULAR",desc:"Comfortable everyday wear",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"},
+ {id:3,name:"Smart Fit Trousers",category:"Pants",price:699,mrp:1099,discount:36,tag:"NEW",desc:"A clean look for any occasion",image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=85"},
+ {id:4,name:"Everyday Track Lower",category:"Lowers",price:399,mrp:599,discount:33,tag:"VALUE PICK",desc:"Relaxed fit for daily comfort",image:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=800&q=85"},
+ {id:5,name:"Printed Casual Shirt",category:"Shirts",price:649,mrp:999,discount:35,tag:"TRENDING",desc:"A fresh look for outings",image:"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=800&q=85"},
+ {id:6,name:"Essential White T-Shirt",category:"T-Shirts",price:279,mrp:399,discount:30,tag:"ESSENTIAL",desc:"Simple, versatile and easy to style",image:"https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=800&q=85"},
+ {id:7,name:"Casual Denim Jeans",category:"Pants",price:799,mrp:1299,discount:38,tag:"FAVOURITE",desc:"Pair with tees and casual shirts",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=85"},
+ {id:8,name:"Comfort Fit Joggers",category:"Lowers",price:449,mrp:699,discount:36,tag:"COMFORT",desc:"A relaxed everyday option",image:"https://images.unsplash.com/photo-1506629905607-d9a6a4a5a1a1?auto=format&fit=crop&w=800&q=85"}
+];
+let cart = [];
+let activeCategory = "All";
+const categories = ["All", ...new Set(products.map(p=>p.category))];
+const money = n => "₹" + Number(n).toLocaleString("en-IN");
+function renderFilters(){
+ document.getElementById("filters").innerHTML = categories.map(c=>`<button class="filter ${c===activeCategory?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join("");
+}
+function setCategory(c){activeCategory=c;renderFilters();renderProducts();}
+function renderProducts(){
+ const list = products.filter(p=>activeCategory==="All"||p.category===activeCategory);
+ document.getElementById("productGrid").innerHTML = list.map(p=>`
+ <article class="card">
+  <div class="photo-wrap"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="badge">${p.tag}</span></div>
+  <div class="card-body"><div class="category">${p.category}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div>
+   <div class="price-row"><span class="price">${money(p.price)}</span><span class="old">${money(p.mrp)}</span><span class="off">${p.discount}% OFF</span></div>
+   <div class="card-actions"><button class="add" onclick="addToCart(${p.id})">Add to Cart</button><button class="buy" onclick="buyNow(${p.id})">Order Now</button></div>
+  </div>
+ </article>`).join("");
+}
+function addToCart(id){const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});updateCartCount();showToast("Added to cart");}
+function buyNow(id){addToCart(id);openCart();}
+function updateCartCount(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);}
+function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("show");document.body.style.overflow="hidden";}
+function closeCart(){document.getElementById("cartOverlay").classList.remove("show");document.body.style.overflow="";}
+function overlayClick(e){if(e.target.id==="cartOverlay")closeCart();}
+function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateCartCount();renderCart();}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCartCount();renderCart();}
+function renderCart(){
+ const box=document.getElementById("cartItems"),summary=document.getElementById("cartSummary"),form=document.getElementById("checkoutForm");
+ if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.<br>Choose a product to get started.</div>';summary.innerHTML="";form.style.display="none";return;}
+ form.style.display="block";
+ box.innerHTML=cart.map(x=>{const p=products.find(z=>z.id===x.id);return `<div class="cart-item"><img src="${p.image}" alt="${p.name}"><div><strong>${p.name}</strong><small>${money(p.price)} each • ${p.discount}% off</small><div class="qty"><button type="button" onclick="changeQty(${p.id},-1)">−</button><span>${x.qty}</span><button type="button" onclick="changeQty(${p.id},1)">+</button></div><button type="button" class="remove" onclick="removeItem(${p.id})">Remove</button></div><strong>${money(p.price*x.qty)}</strong></div>`}).join("");
+ const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);
+ const savings=cart.reduce((s,x)=>{const p=products.find(z=>z.id===x.id);return s+(p.mrp-p.price)*x.qty},0);
+ summary.innerHTML=`<div class="total-line"><span>Estimated savings</span><strong style="color:#21864a">−${money(savings)}</strong></div><div class="total-line final"><span>Subtotal</span><span>${money(total)}</span></div><div class="small-note">Delivery charges, if any, will be confirmed by the store on WhatsApp.</div>`;
+}
+function sendOrder(event){
+ event.preventDefault();
+ if(!cart.length){alert("Your cart is empty.");return;}
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ const address=document.getElementById("customerAddress").value.trim();
+ const size=document.getElementById("customerSize").value;
+ const number=document.getElementById("whatsappNumber").value;
+ const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);
+ const savings=cart.reduce((s,x)=>{const p=products.find(z=>z.id===x.id);return s+(p.mrp-p.price)*x.qty},0);
+ let message=`*NEW ORDER REQUEST — S R BRAND STORE*%0A%0A`;
+ message+=`*Customer:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Size preference:* ${encodeURIComponent(size)}%0A%0A*ORDER ITEMS*%0A`;
+ cart.forEach((x,i)=>{const p=products.find(z=>z.id===x.id);message+=`%0A${i+1}. ${encodeURIComponent(p.name)}%0APrice: ${money(p.price)}%0AQuantity: ${x.qty}%0ADiscount: ${p.discount}%25%0ALine total: ${money(p.price*x.qty)}%0AProduct photo: ${encodeURIComponent(p.image)}%0A`;});
+ message+=`%0A*Estimated savings:* ${money(savings)}%0A*ORDER SUBTOTAL:* ${money(total)}%0A%0APlease confirm availability, delivery charges and final order total.`;
+ const url=`https://wa.me/${number}?text=${message}`;
+ window.open(url,"_blank","noopener");
+}
+let toastTimer;
+function showToast(msg){let t=document.getElementById("toast");if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:5px;z-index:50;font-size:13px";document.body.appendChild(t)}t.textContent=msg;t.style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display="none",1600);}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderFilters();renderProducts();updateCartCount();
+</script>
+</body>
+</html>
